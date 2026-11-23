@@ -1,3 +1,5 @@
+// IMPORTENT INCLUDES
+
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -8,6 +10,8 @@
 #include <unistd.h>
 #include <vector>
 #include <csignal>
+
+// Ctrl + C Blocker COMMAND # for windows and linux with macOs
 
 void DisableExitHotkey()
 {
@@ -20,6 +24,8 @@ void DisableExitHotkey()
 
 using namespace std;
 namespace filesystem = std::filesystem;
+
+// Just give a fuck
 
 void applyChangeCommandIndex(bool is_up, const vector<string> &history, int &hist_idx, string &line, string &draft)
 {
@@ -47,6 +53,8 @@ void applyChangeCommandIndex(bool is_up, const vector<string> &history, int &his
     }
 }
 
+// Find Open Folder COMMAND
+
 string make_prompt(const filesystem::path &current, const filesystem::path &home)
 {
 
@@ -63,6 +71,8 @@ string make_prompt(const filesystem::path &current, const filesystem::path &home
 
     return "\033[32m MINISHELL" + curr_str + "! \033[0m";
 }
+
+// Open Folder COMMAND
 
 string open_folder(const string &arg, const filesystem::path &home)
 {
@@ -88,6 +98,8 @@ string open_folder(const string &arg, const filesystem::path &home)
     return string("\033[32m") + "MINI SHELL ~" + current_folder + "! \033[0m";
 }
 
+// Set-Home COMMAND
+
 filesystem::path getHome()
 {
     const char *HomeEnv = getenv("HOME");
@@ -104,6 +116,8 @@ filesystem::path getHome()
     return filesystem::current_path();
 }
 
+// Open Folder COMMAND
+
 void open_file(string &filename, const string &text)
 {
     ofstream file(filename, ios::app);
@@ -111,20 +125,28 @@ void open_file(string &filename, const string &text)
     file << text << "\n";
 }
 
+// touch COMMAND
+
 void create_file(const string &filename)
 {
     ofstream(filename, ios::app);
 }
+
+// clear COMMAND
 
 void clearTerm()
 {
     system("clear");
 }
 
+// Current Folder PATH COMMAND
+
 void print_pwd()
 {
     cout << filesystem::current_path().string() << "\n";
 }
+
+// List folder COMMAND
 
 void cmd_ls(const filesystem::path &target = filesystem::current_path())
 {
@@ -153,15 +175,21 @@ void cmd_ls(const filesystem::path &target = filesystem::current_path())
     cout << "\n";
 }
 
+// rm <item> COMMAND
+
 void RemoveItems(const string &nameItem)
 {
     filesystem::remove(nameItem);
 }
 
+// mkdir <directory> COMMAND
+
 void Create_Directory(const string &nameDirectory)
 {
     filesystem::create_directory(nameDirectory);
 }
+
+// cat <file> COMMAND
 
 string CatCommand(const string &filename)
 {
@@ -175,6 +203,8 @@ string CatCommand(const string &filename)
 
     return line;
 }
+
+// main function COMMAND
 
 int main()
 {
