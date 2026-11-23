@@ -1,0 +1,80 @@
+====================================================================
+               MINI SHELL // C++20 COMMAND ROADMAP
+====================================================================
+
+[1] pwd
+--------------------------------------------------------------------
+Description: Print the current absolute working directory path.
+Usage:       pwd
+C++ API:     std::filesystem::current_path()
+Key Focus:   Output formatted path to std::cout.
+
+[2] ls [path]
+--------------------------------------------------------------------
+Description: List contents of current or specified directory.
+Usage:       ls [path]  (defaults to current directory if blank)
+C++ API:     std::filesystem::directory_iterator
+Key Focus:   Iterate entries, check entry.is_directory(), formatting output.
+
+[3] cat <file>
+--------------------------------------------------------------------
+Description: Read and print contents of a file to console.
+Usage:       cat filename.txt
+C++ API:     std::ifstream, std::getline
+Key Focus:   Validate file existence (fs::exists), handle file opening errors.
+
+[4] touch <file>
+--------------------------------------------------------------------
+Description: Create an empty file if it doesn't exist.
+Usage:       touch newfile.txt
+C++ API:     std::ofstream, std::filesystem::last_write_time
+Key Focus:   Create output stream or update timestamp if file exists.
+
+[5] mkdir <dir>
+--------------------------------------------------------------------
+Description: Create a new directory.
+Usage:       mkdir folder_name
+C++ API:     std::filesystem::create_directory()
+Key Focus:   Handle directory creation and prevent overwriting existing nodes.
+
+[6] rm <path>
+--------------------------------------------------------------------
+Description: Delete a file or empty directory.
+Usage:       rm file.txt
+C++ API:     std::filesystem::remove()
+Key Focus:   Safety checks before deletion, returning informative error messages.
+
+[7] cp <src> <dst>
+--------------------------------------------------------------------
+Description: Copy a file from source path to destination path.
+Usage:       cp source.txt destination.txt
+C++ API:     std::filesystem::copy_file()
+Key Focus:   Handling overwrite options (std::filesystem::copy_options).
+
+[8] mv <src> <dst>
+--------------------------------------------------------------------
+Description: Move or rename a file/directory.
+Usage:       mv old_name.txt new_name.txt
+C++ API:     std::filesystem::rename()
+Key Focus:   Atomic file renaming and moving across directories.
+
+[9] stat <path>
+--------------------------------------------------------------------
+Description: Display file metadata (size, type, write time).
+Usage:       stat file.txt
+C++ API:     std::filesystem::file_size(), status(), is_regular_file()
+Key Focus:   Inspecting file attributes and formatting sizes (bytes/KB).
+
+[10] exit
+--------------------------------------------------------------------
+Description: Cleanly exit the shell loop.
+Usage:       exit
+C++ API:     return 0 / break loop
+Key Focus:   Proper lifecycle termination of the main command loop.
+
+====================================================================
+RECOMMENDED IMPLEMENTATION ORDER:
+1. pwd, exit, ls    (Safe read-only inspection)
+2. cat, touch, mkdir (File and directory creation)
+3. rm, cp, mv, stat  (Advanced filesystem manipulations & safety)
+====================================================================
